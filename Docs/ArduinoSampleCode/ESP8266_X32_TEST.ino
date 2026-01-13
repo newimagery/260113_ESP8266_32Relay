@@ -3,7 +3,7 @@
   Function: All relays turn on in sequence and then turn off in sequence
   Development Environment: VS Code with PlatformIO
   Note: Clone the entire project to your local machine. If you don't have the required environment set up,
-        you can use this sample code in Docs/ArduinoSampleCode.
+        you can open this file directly with Arduino IDE.
 */
 #define    HC595_SI_PIN     14
 #define    HC595_SCK_PIN    13
