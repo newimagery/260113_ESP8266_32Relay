@@ -1,50 +1,50 @@
 # 260113_ESP8266_32Relay
 
-## 项目介绍
+## Project Introduction
 
-这是一个基于ESP8266微控制器的32路继电器控制项目，支持通过WiFi和MQTT协议远程控制继电器。
+This is a 32-channel relay control project based on ESP8266 microcontroller, supporting remote control of relays via WiFi and MQTT protocol.
 
-## 功能特性
+## Features
 
-- 支持32路继电器独立控制
-- 通过WiFi连接网络
-- 使用MQTT协议进行远程通信
-- 支持单路继电器的开启和关闭
-- 可通过MQTT客户端（如MQTTX）进行控制
-- 提供Arduino IDE兼容的示例代码
+- Supports independent control of 32 channels of relays
+- Connects to network via WiFi
+- Uses MQTT protocol for remote communication
+- Supports turning on and off individual relays
+- Can be controlled via MQTT clients (such as MQTTX)
+- Provides Arduino IDE compatible sample code
 
-## 硬件需求
+## Hardware Requirements
 
-- ESP8266开发板（如ESP-12F）
-- 32路继电器模块（使用HC595移位寄存器驱动）
-- HC595移位寄存器
-- 电源供应（根据继电器模块需求）
-- 连接线若干
+- ESP8266 development board (such as ESP-12F)
+- 32-channel relay module (driven by HC595 shift register)
+- HC595 shift register
+- Power supply (according to relay module requirements)
+- Several connecting wires
 
-## 软件需求
+## Software Requirements
 
-### 开发环境
-- VS Code + PlatformIO插件
-- 或 Arduino IDE
+### Development Environment
+- VS Code + PlatformIO plugin
+- Or Arduino IDE
 
-### 依赖库
+### Dependencies
 - ESP8266WiFi
 - PubSubClient
 
-## 快速开始
+## Quick Start
 
-### 使用VS Code + PlatformIO
+### Using VS Code + PlatformIO
 
-1. 克隆整个项目到本地：
+1. Clone the entire project to local:
    ```bash
    git clone <repository-url>
    ```
 
-2. 打开VS Code并安装PlatformIO插件
+2. Open VS Code and install PlatformIO plugin
 
-3. 打开项目文件夹
+3. Open the project folder
 
-4. 根据需要修改WiFi和MQTT配置（`src/main.cpp`）：
+4. Modify WiFi and MQTT configurations as needed (`src/main.cpp`):
    ```cpp
    // WiFi Configuration
    const char* ssid = "Your_WiFi_SSID";
@@ -55,78 +55,78 @@
    const int mqtt_port = 1883;
    ```
 
-5. 编译并上传代码到ESP8266开发板
+5. Compile and upload the code to ESP8266 development board
 
-### 使用Arduino IDE
+### Using Arduino IDE
 
-1. 从`Docs/ArduinoSampleCode`目录获取示例代码
+1. Get sample code from `Docs/ArduinoSampleCode` directory
 
-2. 打开Arduino IDE并安装ESP8266开发板支持
+2. Open Arduino IDE and install ESP8266 board support
 
-3. 安装所需库：ESP8266WiFi, PubSubClient
+3. Install the required libraries: ESP8266WiFi, PubSubClient
 
-4. 打开`ESP8266_X32_TEST.ino`文件
+4. Open `ESP8266_X32_TEST.ino` file
 
-5. 根据需要修改WiFi和MQTT配置
+5. Modify WiFi and MQTT configurations as needed
 
-6. 编译并上传代码到ESP8266开发板
+6. Compile and upload the code to ESP8266 development board
 
-## 使用说明
+## Usage Instructions
 
-### MQTT控制命令
+### MQTT Control Commands
 
-通过MQTT客户端发送以下格式的命令到主题`relay/control`：
+Send commands in the following format to the topic `relay/control` via MQTT client:
 
-- 开启继电器：`on_X`（X为继电器编号，1-32）
-  示例：`on_1` - 开启继电器1
+- Turn on relay: `on_X` (X is relay number, 1-32)
+  Example: `on_1` - Turn on relay 1
 
-- 关闭继电器：`off_X`（X为继电器编号，1-32）
-  示例：`off_1` - 关闭继电器1
+- Turn off relay: `off_X` (X is relay number, 1-32)
+  Example: `off_1` - Turn off relay 1
 
-### MQTT客户端推荐
+### Recommended MQTT Clients
 
-推荐使用[MQTTX](https://mqttx.app/downloads)作为MQTT客户端进行测试和控制。
+It is recommended to use [MQTTX](https://mqttx.app/downloads) as the MQTT client for testing and control.
 
-## 项目结构
+## Project Structure
 
 ```
 260113_ESP8266_32Relay/
-├── .gitignore          # Git忽略文件配置
-├── Docs/               # 项目文档
-│   ├── ArduinoSampleCode/  # Arduino IDE兼容的示例代码
-│   └── EN/             # 英文文档
-├── include/            # 头文件目录
-├── lib/                # 库目录
+├── .gitignore          # Git ignore file configuration
+├── Docs/               # Project documentation
+│   ├── ArduinoSampleCode/  # Arduino IDE compatible sample code
+│   └── EN/             # English documentation
+├── include/            # Header files directory
+├── lib/                # Libraries directory
 ├── platformio.ini      # PlatformIO配置文件
-├── src/                # 源代码目录
-│   └── main.cpp        # 主程序文件
-└── test/               # 测试目录
+├── src/                # Source code directory
+│   └── main.cpp        # Main program file
+└── test/               # Test directory
 ```
 
-## 引脚定义
+## Pin Definitions
 
-| 功能 | ESP8266引脚 |
+| Function | ESP8266 Pin |
 |------|-------------|
-| HC595_SI (数据) | D5 (GPIO14) |
-| HC595_SCK (时钟) | D7 (GPIO13) |
-| HC595_RCK (锁存) | D6 (GPIO12) |
-| HC595_G (使能) | D1 (GPIO5) |
+| HC595_SI (Data) | D5 (GPIO14) |
+| HC595_SCK (Clock) | D7 (GPIO13) |
+| HC595_RCK (Latch) | D6 (GPIO12) |
+| HC595_G (Enable) | D1 (GPIO5) |
 
-## 示例代码
+## Sample Code
 
-### 开启继电器1
+### Turn on Relay 1
 
 ```cpp
 RelayON(1);
 ```
 
-### 关闭继电器1
+### Turn off Relay 1
 
 ```cpp
 RelayOFF(1);
 ```
 
-### 循环控制所有继电器
+### Cycle Control All Relays
 
 ```cpp
 for (int i = 1; i <= 32; i++) {
@@ -140,18 +140,19 @@ for (int i = 1; i <= 32; i++) {
 }
 ```
 
-## 文档
+## Documentation
 
-- `Docs/EN/`：包含ESP8266相关的英文文档
-- `Docs/ArduinoSampleCode/`：Arduino IDE兼容的示例代码
+- `Docs/EN/`: Contains English documentation related to ESP8266
+- `Docs/ArduinoSampleCode/`: Arduino IDE compatible sample code
 
-## 许可证
+## License
 
-本项目采用MIT许可证。
+This project is licensed under the MIT License.
 
-## 联系方式
+## Contact Information
 
-如有问题或建议，请通过以下方式联系：
+If you have any questions or suggestions, please contact us through the following methods:
 
-- Email: [your-email@example.com]
-- GitHub: [your-github-username]
+- Email: xuetao@newimagery.net
+- https://github.com/newimagery/260113_ESP8266_32Relay
+- WhatsAPP:+86 18601106543
